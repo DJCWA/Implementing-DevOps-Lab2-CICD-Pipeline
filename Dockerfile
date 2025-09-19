@@ -1,8 +1,11 @@
-FROM openjdk:8-jre-alpine
+# Use a small Java 11 runtime image
+FROM eclipse-temurin:11-jre-alpine
 
 EXPOSE 8080
-
-COPY ./build/libs/my-app-1.0-SNAPSHOT.jar /usr/app/
 WORKDIR /usr/app
 
-ENTRYPOINT ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
+# Copy whatever jar Gradle produced and rename it to app.jar inside the image
+COPY build/libs/*.jar /usr/app/app.jar
+
+# Run it
+ENTRYPOINT ["java","-jar","/usr/app/app.jar"]
