@@ -10,6 +10,15 @@ on:
     branches: [ master ]
 
 jobs:
+  echo-message:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Print Lab Message
+        run: echo "Hi, I am from COSC 1209 class"
+
   build-java:
 
     runs-on: ubuntu-latest
